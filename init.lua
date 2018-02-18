@@ -1,44 +1,42 @@
-require "modules/hotkey"
-require "modules/auto_reload"
+-- -----------------------------------------------------------------------
+--           ** HammerSpoon Config File by S1ngS1ng with ❤️ **           --
+-- -----------------------------------------------------------------------
 
-hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'w', function()
-      hs.notify.new({title="Hammerspoon", informativeText="Hello World"}):send()
-end)
+--   ***   Please refer to README.MD for instructions. Cheers!    ***   --
 
-hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'h', function()
-      local win = hs.window.focusedWindow()
-      local f = win:frame()
+-- -----------------------------------------------------------------------
+--                         ** Something Global **                       --
+-- -----------------------------------------------------------------------
+-- Uncomment this following line if you don't wish to see animations
+-- hs.window.animationDuration = 0
 
-      f.x = f.x - 10
-      win:setFrame(f)
-end)
+-- -----------------------------------------------------------------------
+--                            ** Requires **                            --
+-- -----------------------------------------------------------------------
+require "modules/window-management"
+require "modules/vox-control"
+require "modules/key-binding"
 
-function cycle_safari_agents()
-  hs.application.launchOrFocus("Safari")
-  local safari = hs.appfinder.appFromName("Safari")
-
-  local str_default = {"Develop", "User Agent", "Default (Automatically Chosen)"}
-  local str_ie10 = {"Develop", "User Agent", "Internet Explorer 10.0"}
-  local str_chrome = {"Develop", "User Agent", "Google Chrome — Windows"}
-
-  local default = safari:findMenuItem(str_default)
-  local ie10 = safari:findMenuItem(str_ie10)
-  local chrome = safari:findMenuItem(str_chrome)
-
-  if (default and default["ticked"]) then
-    safari:selectMenuItem(str_ie10)
-    hs.alert.show("IE10")
+-- -----------------------------------------------------------------------
+--                            ** For Debug **                           --
+-- -----------------------------------------------------------------------
+function reloadConfig(files)
+  local doReload = false
+  for _,file in pairs(files) do
+    if file:sub(-4) == ".lua" then
+      doReload = true
+    end
   end
-  if (ie10 and ie10["ticked"]) then
-    safari:selectMenuItem(str_chrome)
-    hs.alert.show("Chrome")
-  end
-  if (chrome and chrome["ticked"]) then
-    safari:selectMenuItem(str_default)
-    hs.alert.show("Safari")
+  if doReload then
+    hs.reload()
   end
 end
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, '7', cycle_safari_agents)
+hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
+hs.notify.new({title="Hammerspoon", informativeText="config loaded!"}):send()
 
-hs.loadSpoon("ReloadConfiguration")
-spoon.ReloadConfiguration:start()
+-- Well, sometimes auto-reload is not working, you know u.u
+-- hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function()
+--     hs.reload()
+--     hs.alert.show("Config loaded")
+-- end)
+
