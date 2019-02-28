@@ -17,7 +17,9 @@ end
 -- * Move window to screen
 windowBind({"ctrl", "alt"}, {
   left = wm.throwLeft,
-  right = wm.throwRight
+  right = wm.throwRight,
+  j = wm.throwLeft,
+  l = wm.throwRight
 })
 
 -- * Set Window Position on screen
@@ -27,25 +29,37 @@ windowBind({"ctrl", "alt", "cmd"}, {
   left = wm.leftHalf,       -- ⌃⌥⌘ + ←
   right = wm.rightHalf,     -- ⌃⌥⌘ + →
   up = wm.topHalf,          -- ⌃⌥⌘ + ↑
-  down = wm.bottomHalf      -- ⌃⌥⌘ + ↓
+  down = wm.bottomHalf,     -- ⌃⌥⌘ + ↓
+  j = wm.leftHalf,          -- ⌃⌥⌘ + j
+  l = wm.rightHalf,         -- ⌃⌥⌘ + l
+  i = wm.topHalf,           -- ⌃⌥⌘ + i
+  k = wm.bottomHalf         -- ⌃⌥⌘ + k
 })
 -- * Set Window Position on screen
 windowBind({"ctrl", "alt", "shift"}, {
   left = wm.rightToLeft,      -- ⌃⌥⇧ + ←
   right = wm.rightToRight,    -- ⌃⌥⇧ + →
   up = wm.bottomUp,           -- ⌃⌥⇧ + ↑
-  down = wm.bottomDown        -- ⌃⌥⇧ + ↓
+  down = wm.bottomDown,       -- ⌃⌥⇧ + ↓
+  j = wm.rightToLeft,         -- ⌃⌥⇧ + j
+  l = wm.rightToRight,        -- ⌃⌥⇧ + l
+  i = wm.bottomUp,            -- ⌃⌥⇧ + i
+  k = wm.bottomDown           -- ⌃⌥⇧ + k
 })
 -- * Set Window Position on screen
 windowBind({"alt", "cmd", "shift"}, {
   left = wm.leftToLeft,      -- ⌥⌘⇧ + ←
   right = wm.leftToRight,    -- ⌥⌘⇧ + →
   up = wm.topUp,             -- ⌥⌘⇧ + ↑
-  down = wm.topDown          -- ⌥⌘⇧ + ↓
+  down = wm.topDown,         -- ⌥⌘⇧ + ↓
+  j = wm.leftToLeft,         -- ⌥⌘⇧ + j
+  l = wm.leftToRight,        -- ⌥⌘⇧ + l
+  i = wm.topUp,              -- ⌥⌘⇧ + i
+  k = wm.topDown             -- ⌥⌘⇧ + k
 })
 
 -- * Windows-like cycle
 windowBind({"ctrl", "alt", "cmd"}, {
   u = wm.cycleLeft,          -- ⌃⌥⌘ + u
-  i = wm.cycleRight          -- ⌃⌥⌘ + i
+  y = wm.cycleRight          -- ⌃⌥⌘ + y
 })
